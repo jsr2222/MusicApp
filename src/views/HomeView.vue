@@ -1,27 +1,41 @@
 <template>
   <div class="home">
-    <div id="d1"></div>
-    <div><i class="iconfont icon-sousuo">111</i></div> 
+    <topnav ></topnav>
+    <div class="gap"></div>
+    <swipercom></swipercom>
   </div>
+
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import topnav from '@/components/TopNav.vue'
+import swipercom from "@/components/Swipercom.vue"
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
-  }
+    topnav,
+    swipercom
+  },
+  setup() {
+      const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
+      return {
+        onSwiper,
+        onSlideChange,
+      };
+    },
 }
+
+
 </script>
 
 <style lang="less" scoped>
-
-#d1 {
-  width: 3.75rem;
-  height: 3.75rem;
-  background: skyblue;
+.gap {
+  height: 0.4rem;
 }
 </style>

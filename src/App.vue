@@ -1,12 +1,20 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  </nav> -->
+  <!-- <span class="iconfont icon-sousuo"></span> -->
+  <router-view></router-view>
 </template>
 
 <style lang="less">
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: '微软雅黑';
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,5 +34,13 @@ nav {
       color: #42b983;
     }
   }
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>
