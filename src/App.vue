@@ -5,35 +5,33 @@
   </nav> -->
   <!-- <span class="iconfont icon-sousuo"></span> -->
   <router-view></router-view>
+  <play-controller></play-controller>
 </template>
 
-<style lang="less">
+<script>
+import playController from '@/components/PlayController.vue'
+export default {
+  components: {
+    playController,
+  },
+  mounted() {
+    // 把数据解析成对象
+    if (localStorage.userData != undefined) {
+      let userData = JSON.parse(localStorage.userData)
+      this.$store.commit('setUser', userData)
+    }
 
+  }
+}
+
+</script>
+
+<style lang="less">
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: '微软雅黑';
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 
 .icon {
@@ -42,5 +40,10 @@ nav {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
 }
 </style>

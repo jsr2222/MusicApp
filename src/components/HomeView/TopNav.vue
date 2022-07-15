@@ -1,9 +1,9 @@
 <template>
     <div class="topnav">
-        <div class="topLeft">
+        <div class="topLeft" @click="$router.push('./personview')">
             <span class="iconfont icon-liebiao"></span>
         </div>
-        <div class="topCenter">
+        <div class="topCenter" @click="$router.push('/searchview')">
             <!-- <span class="navBtn">我的</span>
             <span class="navBtn active">发现</span>
             <span class="navBtn">云村</span>
@@ -11,7 +11,7 @@
             <i class="iconfont icon-sousuo"></i>
             <input type="text"  placeholder="搜索你喜欢的音乐">
         </div>
-        <div class="topRight">
+        <div class="topRight" >
             <span class="iconfont icon-a-6Ahuatong"></span>
         </div>
     </div>
@@ -46,7 +46,7 @@ export default {
     }
 
     .topCenter {
-        width: 5rem;
+        width: 5.7rem;
         display: flex;
         justify-content: space-around;
         position: relative;
@@ -60,12 +60,13 @@ export default {
             -moz-appearance: none;
             appearance: none;
             outline: 0;
-            width: 5rem;
+            width: 5.5rem;
             height: 0.6rem;
             border: 0rem solid #fff;
             border-radius: 0.3rem;
-            box-shadow: 0 0 0.1rem 0.03rem rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 0 0.1rem 0.03rem rgba(0, 0, 0, 0.1);
             padding-left: 0.65rem;
+            background-color: #f0eeee;
         }
 
         /* WebKit browsers */
