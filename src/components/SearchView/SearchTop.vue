@@ -81,7 +81,7 @@ export default {
             localStorage.keywordList = JSON.stringify(this.keywordList);
             let result = await searchMusic(this.searchKeyword);
             this.searchSongs = result.data.result.songs;
-            console.log(result);
+            // console.log(result);
         },
         clear: function () {
             this.keywordList = [];

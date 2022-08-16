@@ -13,7 +13,7 @@
             <span class="iconfont icon-24gf-playlist"></span>
         </div>
         <playMusic @back="show = !show" v-show="show" :playDetail="playlist[playCurrentIndex]" :paused="paused"
-            :play="play"></playMusic>
+            :play="play" @changePausedFlag="changePause"></playMusic>
         <audio ref="audio"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"></audio>
     </div>
@@ -55,9 +55,11 @@ export default {
                 clearInterval(this.$store.state.id)
             }
         },
+        changePause(){
+            this.paused = true;
+        },  
         UpdateTime() {
             this.$store.state.id = setInterval(() => {
-                // console.log('this.$refs.audio.currentTime = ', this.$refs.audio.currentTime)
                 this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
             }, 1000)
         }
@@ -79,6 +81,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     border-top: 0.01rem solid #ccc;
+    z-index: 999;
 
     .left {
         display: flex;

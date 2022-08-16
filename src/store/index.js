@@ -23,18 +23,26 @@ export default createStore({
     intervalId: 0,
     user: {
       isLogin: false,
-      account:{},
-      userDetail:{}
+      account: {},
+      userDetail: {}
     }
   },
   getters: {
     lyricList: function (state) {
       let arr = state.lyric.split(/\n/igs).map((item, i, arr) => {
-        let min = parseInt(item.slice(1, 3));
-        let sec = parseInt(item.slice(4, 6));
-        let mill = parseInt(item.slice(7, 9));
-        let lyric = item.slice(10, item.length);
-        let time = mill + sec * 1000 + min * 60 * 1000;
+        let min = 0,
+          sec = 0,
+          mill = 0,
+          time = 0;
+        let lyric = ''
+        if (item) {
+          min = parseInt(item.split('[')[1].split(':')[0]);
+          sec = parseInt(item.split('[')[1].split(':')[1].split('.')[0]);
+          mill = parseInt(item.split(']')[0].split('.')[1]);
+          lyric = item.split(']')[1];
+          time = mill + sec * 1000 + min * 60 * 1000;
+        }
+
 
         return {
           min,
@@ -45,13 +53,14 @@ export default createStore({
         }
       })
       arr.forEach((item, i) => {
-        if (i == 0) {
-          item.pre = 0;
+        item.pre = item.time;
+        if (i + 1 < arr.length) {
+          item.time = arr[i + 1].time
         } else {
-          item.pre = arr[i - 1].time
+          item.time = item.pre + 1000 * 5;
         }
       })
-      console.log(arr)
+      // console.log(arr)
       return arr
     }
   },
@@ -81,7 +90,7 @@ export default createStore({
       // console.log('payload: ' + payload)
       let result = await api.getLyric(payload.id)
       content.commit('setLyric', result.data.lrc.lyric)
-      console.log('lyric: ', result.data.lrc.lyric)
+      // console.log('lyric: ', result.data.lrc.lyric)
     },
     async login(content, payload) {
       // console.log(payload)
@@ -91,9 +100,9 @@ export default createStore({
         content.state.user.isLogin = true;
         content.state.user.account = result.data.account
         let userDetail = await api.userDetail(result.data.account.id)
-        console.log('userDetail = ', userDetail)
+        // console.log('userDetail = ', userDetail)
         content.state.user.userDetail = userDetail.data
-        content.commit('setUser',content.state.user)
+        content.commit('setUser', content.state.user)
         // 将用户信息保存到localstorage中
         localStorage.userData = JSON.stringify(content.state.user)
       }

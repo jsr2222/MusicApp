@@ -4,30 +4,32 @@
         <div class="playTop">
             <span class="iconfont icon-zuojiantou" @click="$emit('back')"></span>
             <div class="center">
-                <marquee behavior="scroll" direction="right" loop="-1">
+                <div class="slider">
                     <div class="title">{{ playDetail.name }}</div>
                     <div class="author" v-for="(author, index) in playDetail.ar" :key="index">{{ author.name }}</div>
-                </marquee>
+                </div>
             </div>
             <span class="iconfont icon-fenxiangxiao"></span>
         </div>
-        <div class="playContent" v-show="!isLyric">
+        <div class="playContent" v-show="!isLyric" @click="isLyric = !isLyric">
             <img class="needle" :class="{ active: !paused }" src="../assets/img/needle-ab.png" alt="">
             <img class="disc" src="../assets/img/d7e4e3a244701ee85fecb5d4f6b5bd57.png" alt="">
             <img class="discImg" :src="playDetail.al.picUrl" alt="">
         </div>
-        <div class="playLyric" v-show="isLyric" ref = "playLyric">
+        <div class="playLyric" v-show="isLyric" @click="isLyric = !isLyric" ref="playLyric">
             <!-- {{$store.state.lyric.toString()}} -->
-            <p :class="{active:(currentTime*1000 < item.time)&& (currentTime*1000 >= item.pre)}" v-for="(item, i) in $store.getters.lyricList" :key="i">
+            <p :class="{ active: (currentTime * 1000 < item.time) && (currentTime * 1000 >= item.pre) }"
+                v-for="(item, i) in $store.getters.lyricList" :key="i">
                 {{ item.lyric }}
+                
             </p>
         </div>
         <div class="progress"></div>
         <div class="playFooter">
             <span class="iconfont icon-liebiaoxunhuan"></span>
             <span class="iconfont icon-hanhan-01-01" @click="goPlay(-1)"></span>
-            <span v-show="!paused" class="iconfont icon-24gl-playCircle" @click="play"></span>
-            <span v-show="paused" class="iconfont icon-iconstop" @click="play"></span>
+            <span v-show="paused" class="iconfont icon-24gl-playCircle" @click="play"></span>
+            <span v-show="!paused" class="iconfont icon-iconstop" @click="play"></span>
             <span class="iconfont icon-hanhan-01-011" @click="goPlay(1)"></span>
             <span class="iconfont icon-24gf-playlist"></span>
         </div>
@@ -41,36 +43,37 @@ export default {
     props: ['playDetail', 'paused', 'play'],
     data: function () {
         return {
-            isLyric: true
+            isLyric: false
         }
     },
     computed: {
-        ...mapState(['lyric','currentTime','playlist','playCurrentIndex']),
-       
+        ...mapState(['lyric', 'currentTime', 'playlist', 'playCurrentIndex']),
+
     },
     watch: {
-        currentTime:function(newValue) {
-            console.log('newValue', newValue)
-            console.log([this.$refs.playLyric])
+        currentTime: function (newValue) {
+            console.log('newValue', newValue * 1000)
+            // console.log([this.$refs.playLyric])
             let p = document.querySelector('p.active')
-            if(p){
+            if (p) {
                 this.$refs.playLyric.scrollTop = p.offsetTop;
-                console.log([p])
+                // console.log([p])
             }
         }
     },
     methods: {
         goPlay(num) {
-            console.log(num)
-            console.log(this.playlist)
-            console.log(this.playCurrentIndex)
+            // console.log(num)
+            // console.log(this.playlist)
+            // console.log(this.playCurrentIndex)
             let index = this.playCurrentIndex + num
-            if(index < 0) {
+            if (index < 0) {
                 index = this.playlist.length - 1;
-            } else if(index == this.playlist.length) {
+            } else if (index == this.playlist.length) {
                 index = 0;
             }
-            this.$store.commit('setPlayIndex',index)
+            this.$store.commit('setPlayIndex', index)
+            this.$emit('changePausedFlag')
         }
     }
 }
@@ -117,12 +120,52 @@ export default {
         .center {
             width: 5.5rem;
 
+            @keyframes slide {
+                0%  {
+                    left: 0rem;
+                    top: 0rem;
+                }
+
+                100% {
+                    left: 4rem;
+                    top: 0rem;
+                }
+            }
+
+            @-webkit-keyframes slide
+
+            /* Safari 与 Chrome */
+                {
+                0% {
+                    left: 0rem;
+                    top: 0rem;
+                }
+
+                100% {
+                    left: 2rem;
+                    top: 0rem;
+                }
+            }
+
+            .slider {
+                width: 1.5rem;
+                position: relative;
+                animation: slide 5s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-delay: 2s;
+                /* Safari 与 Chrome: */
+                -webkit-animation: slide 5s;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-delay: 2s;
+            }
+
             // flex: 1;
             .author {
                 font-size: 0.2rem;
                 color: #ccc;
             }
-
         }
     }
 
@@ -179,8 +222,9 @@ export default {
         top: calc(50% - 5rem);
         overflow: scroll;
         text-align: center;
-        color: rgb(123,123,123);
+        color: rgb(123, 123, 123);
         padding: 0.2rem 0;
+
         .active {
             color: #fff;
             font-size: 0.4rem;

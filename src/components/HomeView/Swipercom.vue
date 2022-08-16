@@ -51,7 +51,7 @@ export default {
             this.$emit('func', img)
         },
         addEvent:function(){
-            console.log(mySwiper.activeIndex)
+            // console.log(mySwiper.activeIndex)
         }
     },
     async mounted() {

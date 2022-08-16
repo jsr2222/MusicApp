@@ -7,6 +7,7 @@
     <iconList></iconList>
     <div class="link-top"></div>
     <musicList></musicList>
+    <!-- <playControl></playControl> -->
   </div>
 
 </template>
@@ -17,22 +18,23 @@ import topnav from '@/components/HomeView/TopNav.vue'
 import swipercom from "@/components/HomeView/Swipercom.vue"
 import iconList from '@/components/HomeView/IconList.vue'
 import musicList from '@/components/HomeView/MusicList.vue'
-import { reactive, onMounted, onUpdated } from 'vue'
+// import playControl from'@/components/PlayController.vue'
 export default {
   name: 'HomeView',
   components: {
     topnav,
     swipercom,
     iconList,
-    musicList
+    musicList,
+    // playControl
   },
   setup() {
     // let ImgFromBanner = reactive({})
     const onSwiper = (swiper) => {
-      console.log(swiper);
+      // console.log(swiper);
     };
     const onSlideChange = () => {
-      console.log('slide change');
+      // console.log('slide change');
     };
     return {
       onSwiper,

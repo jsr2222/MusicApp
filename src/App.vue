@@ -10,10 +10,11 @@
 
 <script>
 import playController from '@/components/PlayController.vue'
+import HomeView from '@/views/HomeView.vue'
 export default {
   components: {
-    playController,
-  },
+    playController
+},
   mounted() {
     // 把数据解析成对象
     if (localStorage.userData != undefined) {
