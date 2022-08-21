@@ -21,7 +21,6 @@
             <p :class="{ active: (currentTime * 1000 < item.time) && (currentTime * 1000 >= item.pre) }"
                 v-for="(item, i) in $store.getters.lyricList" :key="i">
                 {{ item.lyric }}
-                
             </p>
         </div>
         <div class="progress"></div>
@@ -52,7 +51,7 @@ export default {
     },
     watch: {
         currentTime: function (newValue) {
-            console.log('newValue', newValue * 1000)
+            // console.log('newValue', newValue * 1000)
             // console.log([this.$refs.playLyric])
             let p = document.querySelector('p.active')
             if (p) {
@@ -73,7 +72,6 @@ export default {
                 index = 0;
             }
             this.$store.commit('setPlayIndex', index)
-            this.$emit('changePausedFlag')
         }
     }
 }
@@ -119,15 +117,17 @@ export default {
 
         .center {
             width: 5.5rem;
+            padding-top: 0.5rem;
+            overflow: hidden;
 
             @keyframes slide {
-                0%  {
+                0% {
                     left: 0rem;
                     top: 0rem;
                 }
 
                 100% {
-                    left: 4rem;
+                    left: 5rem;
                     top: 0rem;
                 }
             }
@@ -142,23 +142,21 @@ export default {
                 }
 
                 100% {
-                    left: 2rem;
+                    left: 5rem;
                     top: 0rem;
                 }
             }
 
             .slider {
-                width: 1.5rem;
+                // width: 1.5rem;
                 position: relative;
                 animation: slide 5s;
                 animation-timing-function: linear;
                 animation-iteration-count: infinite;
-                animation-delay: 2s;
                 /* Safari 与 Chrome: */
                 -webkit-animation: slide 5s;
                 -webkit-animation-timing-function: linear;
                 -webkit-animation-iteration-count: infinite;
-                -webkit-animation-delay: 2s;
             }
 
             // flex: 1;

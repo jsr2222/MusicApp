@@ -8,25 +8,26 @@
             </div>
         </div>
         <div class="right">
-            <span v-show="paused" class="iconfont icon-iconstop" @click="play()"></span>
-            <span v-show="!paused" class="iconfont icon-24gl-playCircle" @click="play()"></span>
+            <span v-show="!paused" class="iconfont icon-iconstop" @click="play()"></span>
+            <span v-show="paused" class="iconfont icon-24gl-playCircle" @click="play()"></span>
             <span class="iconfont icon-24gf-playlist"></span>
         </div>
         <playMusic @back="show = !show" v-show="show" :playDetail="playlist[playCurrentIndex]" :paused="paused"
-            :play="play" @changePausedFlag="changePause"></playMusic>
+            :play="play"></playMusic>
         <audio ref="audio"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"></audio>
     </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 import playMusic from '@/components/PlayMusic.vue'
 export default {
     data() {
         return {
             paused: true,
             show: false,
+            temp: 0,
         };
     },
     computed: {
@@ -34,13 +35,16 @@ export default {
     },
     mounted() {
         // console.log('[this.$refs.audio] = ',[this.$refs.audio.currentTime]);
+        this.temp = this.playCurrentIndex;
 
     },
     updated() {
         // console.log(this.playlist[this.playCurrentIndex]);
         this.$store.dispatch('reqLyric', { id: this.playlist[this.playCurrentIndex].id });
-        
-
+        if (this.playCurrentIndex != this.temp) {
+            this.paused = true;
+        }
+        this.temp = this.playCurrentIndex;
     },
     methods: {
         play: function () {
@@ -55,9 +59,6 @@ export default {
                 clearInterval(this.$store.state.id)
             }
         },
-        changePause(){
-            this.paused = true;
-        },  
         UpdateTime() {
             this.$store.state.id = setInterval(() => {
                 this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)

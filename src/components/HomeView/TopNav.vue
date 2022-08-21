@@ -34,6 +34,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0.3rem;
+    padding-top: 0.5rem;
 
     .icon-liebiao {
         font-size: 0.5rem;
@@ -66,7 +67,7 @@ export default {
             border-radius: 0.3rem;
             // box-shadow: 0 0 0.1rem 0.03rem rgba(0, 0, 0, 0.1);
             padding-left: 0.65rem;
-            background-color: #f0eeee;
+            background-color: #fff;
         }
 
         /* WebKit browsers */

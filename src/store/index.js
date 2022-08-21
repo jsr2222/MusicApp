@@ -43,7 +43,6 @@ export default createStore({
           time = mill + sec * 1000 + min * 60 * 1000;
         }
 
-
         return {
           min,
           sec,
@@ -64,6 +63,7 @@ export default createStore({
       return arr
     }
   },
+  // 用来存放修改state的方法
   mutations: {
     setPlayList: function (state, value) {
       state.playlist = value
@@ -72,7 +72,31 @@ export default createStore({
       state.playlist.push(value)
     },
     setPlayIndex(state, value) {
+      console.log('change Index')
       state.playCurrentIndex = value
+    },
+    // 从SongList.vue 传入一首歌
+    addMusicPlay:function(state, value){
+      value.al = {
+        picUrl: value.picUrl
+      }
+      console.log(value)
+      state.playlist = [value]
+      console.log("addMusicPlay",state.playlist)
+      // state.playlist.splice(state.playCurrentIndex + 1, 0, value)
+      // console.log(state.playlist)
+      // state.playCurrentIndex=0;
+    },
+    // 从 SongList.vue 传入整个歌单列表
+    setSongList:function (state, value) {
+      state.songlist = value
+      console.log(state.songlist)
+      for(let v of value){
+        v.al = {
+          picUrl: v.picUrl
+        }
+      }
+      state.playlist = value
     },
     setLyric(state, value) {
       state.lyric = value

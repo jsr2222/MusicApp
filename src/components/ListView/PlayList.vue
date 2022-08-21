@@ -2,7 +2,6 @@
     <div class="playlist">
         <div class="playlist-top">
             <div class="top">
-
                 <div class="top-left">
                     <span class="iconfont icon-24gf-playCircle"></span>
                     <div class="title">播放全部</div>
@@ -15,7 +14,7 @@
             </div>
         </div>
         <div class="musicList">
-            <div class="playItem" v-for="(item, i) in playlist.tracks" :key="i">
+            <div class="playItem" v-for="(item, i) in playlist.tracks" :key="i" @click="setPlayIndex(i)">
                 <div class="left">
                     <div class="index">{{ i + 1 }}</div>
                     <div class="content">
@@ -31,7 +30,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <span class="iconfont icon-24gl-playCircle" @click="setPlayIndex(i)"></span>
+                    <span class="iconfont icon-24gl-playCircle" ></span>
                     <span class="iconfont icon-gengduo-shuxiang"></span>
                 </div>
             </div>

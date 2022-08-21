@@ -66,6 +66,12 @@ export function userDetail(uid) {
     return axios.get(`${baseUrl}/user/detail?uid=${uid}`)
 }
 
+// 获取每日推荐歌曲
+// 说明 : 调用此接口 , 可获得每日推荐歌曲 ( 需要登录 )
+export function daySong(limit) {
+    return axios.get(`${baseUrl}/personalized/newsong?limit=${limit}`)
+}
+
 export default {
     getBanner,
     getIconList,

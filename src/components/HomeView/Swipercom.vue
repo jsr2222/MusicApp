@@ -36,8 +36,6 @@ export default {
                 { pic: require('../../assets/img/swiper6.jpg') },
                 { pic: require('../../assets/img/swiper3.jpg') },
                 { pic: require('../../assets/img/swiper4.jpg') },
-                { pic: require('../../assets/img/swiper5.jpg') },
-                { pic: require('../../assets/img/swiper6.jpg') },
             ]
         }
     },
@@ -64,7 +62,7 @@ export default {
             loop: true, // 循环模式选项
             speed: 300, //速度
             // freeMode: true, //根据惯性滑动可能不止一格且不会贴合
-            // observer: true, //修改swiper自己或子元素时，自动初始化swiper
+            observer: true, //修改swiper自己或子元素时，自动初始化swiper
             autoplay: true, //自动切换
             spaceBetween: 20,//间距20px
             // 分页器
@@ -102,6 +100,7 @@ export default {
 #swipercom {
     width: 7.5rem;
     height: 3rem;
+    padding-top: 0.15rem;
 
     #swiperIndex.swiper-container {
         width: 6.9rem;

@@ -103,9 +103,10 @@ export default {
 <style lang="less" scoped>
 .musicList {
     width: 7.5rem;
-    padding: 0rem 0.3rem 0.3rem 0.3rem;
+    padding: 0.1rem 0.3rem 0.3rem 0.3rem;
     height: 4rem;
     background-color: white;
+    border-radius: 0.2rem;
 
     .musicList-top {
         height: 1rem;

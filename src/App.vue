@@ -10,7 +10,6 @@
 
 <script>
 import playController from '@/components/PlayController.vue'
-import HomeView from '@/views/HomeView.vue'
 export default {
   components: {
     playController
