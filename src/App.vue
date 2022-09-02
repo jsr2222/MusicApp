@@ -5,14 +5,23 @@
   </nav> -->
   <!-- <span class="iconfont icon-sousuo"></span> -->
   <router-view></router-view>
+  <star-Rate @show = "star" v-if="show"></star-Rate>
   <play-controller></play-controller>
 </template>
 
 <script>
 import playController from '@/components/PlayController.vue'
+import starRate from '@/components/StarRate.vue'
 export default {
+  data() {
+    return {
+      show :true
+    };
+
+  },
   components: {
-    playController
+    playController,
+    starRate
 },
   mounted() {
     // 把数据解析成对象
@@ -20,7 +29,11 @@ export default {
       let userData = JSON.parse(localStorage.userData)
       this.$store.commit('setUser', userData)
     }
-
+  },
+  methods: {
+    star(show) {
+      this.show = show
+    }
   }
 }
 

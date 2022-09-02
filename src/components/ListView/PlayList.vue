@@ -40,14 +40,11 @@
 
 <script>
 import { mapMutations } from 'vuex';
+import {mixins} from '../../mixin/index.js'
 export default {
     props: ['playlist'],
+    mixinss:[mixins],
     methods: {
-        trim: function (num) {
-            let res = num;
-            res.replace(/(^\s*)|(\s*$)/g, "");
-            return res;
-        },
         ...mapMutations(['setPlayIndex'])
     },
 

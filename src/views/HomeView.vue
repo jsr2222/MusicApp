@@ -12,6 +12,7 @@
       <musicList></musicList>
       <songList></songList>
     </div>
+    <!-- <starRate></starRate> -->
   </div>
 
 </template>
@@ -23,6 +24,7 @@ import swipercom from "@/components/HomeView/Swipercom.vue"
 import iconList from '@/components/HomeView/IconList.vue'
 import musicList from '@/components/HomeView/MusicList.vue'
 import songList from '@/components/HomeView/SongList.vue'
+// import starRate from '@/components/StarRate.vue'
 
 export default {
   name: 'HomeView',
@@ -32,6 +34,7 @@ export default {
     iconList,
     musicList,
     songList,
+    // starRate,
   },
   setup() {
     // let ImgFromBanner = reactive({})
